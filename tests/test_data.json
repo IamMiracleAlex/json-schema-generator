@@ -1,0 +1,18 @@
+{
+    "attributes": {
+      "appName": "ABCDEFGHIJKLMNOPQRSTUVW",
+      "eventType": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "subEventType": "ABCDEFGHIJKLMNO",
+      "sensitive": false
+    },
+    "message": {
+      "time": 890,
+      "acl": [],
+      "publicFeed": false,
+      "internationalCountries": [
+        "ABCDEFG",
+        "ABCDEFGHIJKLM"
+      ],
+      "topTraderFeed": true
+    }
+  }

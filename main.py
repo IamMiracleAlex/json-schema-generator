@@ -38,18 +38,20 @@ class JSONSchemaGenerator:
 		Writes processed data to a json file
 	"""
 
-	def __init__(self, prog: str = "Json Schema Generator") -> None:
+	def __init__(self, prog: str = "Json Schema Generator", file_path: str = "") -> None:
 		"""
 		Constructs all the necessary attributes for the JSONSchemaGenerator object.
 
 		Parameters
 		----------
-			name : prog
+			name : str
 				The name of the program
+			file_path : str
+				The file path; used when file is not specified from cli
 		"""
 
 		self._create_parser(prog)
-		self.file_path = f"data/{self.args.filename}"
+		self.file_path = file_path or f"data/{self.args.filename}" 
 		self.schema_path = self.file_path.replace("data", "schema")
 
 	def run(self):
@@ -194,17 +196,3 @@ if __name__ == "__main__":
 	JSONSchemaGenerator().run()
 	
 
-
-
-# - create nested - default
-# -create unnested [-f --format nested or normal]
-
-
-# code - done
-# doc strings - done
-# comments - done
-# tests
-# best practices
-# readme
-# github
-# submit
