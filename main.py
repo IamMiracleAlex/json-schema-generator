@@ -5,7 +5,7 @@ from typing import Any
 
 class JSONSchemaGenerator:
 	"""
-	A class to generate a json schema.
+	A class to generate json schema.
 
 	...
 
@@ -29,11 +29,11 @@ class JSONSchemaGenerator:
 	success(message: str):
 		Prints a success message to the cli..
 	get_type(val: Any):
-		Returns the type of a given value.
+		Returns the json type of a given value.
 	get_json_data(file_path: str):
 		Return json file data as dict
 	generate_schema(message: dict):
-		Generate schema for a given dict
+		Generate schema for a given data
 	write_data_to_file(data: dict, file_path: str):
 		Writes processed data to a json file
 	"""
@@ -47,20 +47,23 @@ class JSONSchemaGenerator:
 			name : str
 				The name of the program
 			file_path : str
-				The file path; used when file is not specified from cli
+				The file path; used to run the program outside of the cli
 		"""
 
 		self._create_parser(prog)
-		self.file_path = file_path or f"data/{self.args.filename}" 
-		self.schema_path = self.file_path.replace("data", "schema")
+		self.file_path: str = file_path or f"data/{self.args.filename}" 
+		self.schema_path: str = self.file_path.replace("data", "schema")
 
 	def run(self):
 		"""
-		Runs the program to extract data from json file, add types and create a json schema
+		Runs the program: extract data from json file, add types and create a json schema
 		"""		
 
 		data: dict = self.get_json_data(self.file_path)
+
+		# capture only attributes within "message"
 		message: dict = data.get("message", {})
+
 		processed: dict = self.generate_schema(message)
 		self.write_data_to_file(processed, self.schema_path)
 		self.success(f"Schema generated successfully and saved in {self.schema_path}")
@@ -71,17 +74,17 @@ class JSONSchemaGenerator:
 		Prints a well formatted error message to the cli.
 
 			Parameters:
-					message (str): The message to be printed
+				message (str): The message to be printed
 		"""	
 
 		self.parser.error(message)
 
 	def success(self, message):
 		"""
-		Prints a well formatted success message to the cli.
+		Prints a success message to the cli.
 
 			Parameters:
-					message (str): The message to be printed
+				message (str): The message to be printed
 		"""			
 		
 		print(message)
@@ -91,7 +94,7 @@ class JSONSchemaGenerator:
 		Creates a parser and args.
 
 			Parameters:
-					prog (str): The prog name
+				prog (str): The prog name
 		"""		
 
 		self.parser = argparse.ArgumentParser(
@@ -105,16 +108,16 @@ class JSONSchemaGenerator:
 
 	def get_type(self, val: Any) -> str:
 		"""
-		Returns the type of a given value.
+		Returns the json type of a given value.
 
 			Parameters:
-					val (Any): The value to get type for
+				val (Any): The value to get type for
 
 			Returns:
-					_type (str): The type of the value
+				_type (str): The json type of the value
 		"""	
 
-		type = "invalid"
+		_type = "invalid"
 		if isinstance(val, str):
 			_type = "string"
 		elif isinstance(val, int):
@@ -135,7 +138,7 @@ class JSONSchemaGenerator:
 		Retrieves the json data from a file and return as dict.
 
 			Parameters:
-					file_path (str): The file path
+				file_path (str): The file path
 		"""	
 
 		try:
@@ -150,10 +153,10 @@ class JSONSchemaGenerator:
 		Generate schema for a given dict and returns a dict.
 
 			Parameters:
-					message (dict): The message dict
+				message (dict): The message dict
 
 			Returns:
-					processed (dict): The processed dict with types
+				processed (dict): The processed dict with types
 		"""		
 
 		processed: dict = {}
@@ -174,10 +177,10 @@ class JSONSchemaGenerator:
 
 	def write_data_to_file(self, data: dict, file_path: str) -> None:
 		"""
-		Writes a dict to a json file.
+		Writes schema data to a json file.
 
 			Parameters:
-					data (dict): The data dict
+				data (dict): The data dict
 		"""		
 
 		# convert data to json

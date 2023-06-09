@@ -4,6 +4,12 @@
 Generate a JSON Schema from a JSON file
 
 
+## Requirements
+- No external dependencies required.
+- **Python version 3.8 or above**
+
+
+
 To run:
 ```python
 
@@ -19,12 +25,12 @@ python3 main.py data2.json
 ```
 
 
-The Generated schema is store in `./schema` directory.
+The Generated schema is stored in `./schema` directory.
 
 
-### Tests
+## Tests
 
-To run:
+To run tests:
 
 ```python
 

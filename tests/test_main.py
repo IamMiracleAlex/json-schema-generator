@@ -10,7 +10,7 @@ class JSONSchemaGeneratorTest(unittest.TestCase):
 		self.schema_generator = JSONSchemaGenerator("Test Generator", self.test_file_path)
 
 	def test_json_schema_generator(self):
-		"Assert json schema generator works properly with the correct data"
+		"Assert json schema generator works properly"
 
 		self.schema_generator.run()
 		test_schema_path = self.test_file_path.replace("data", "schema")
@@ -18,7 +18,11 @@ class JSONSchemaGeneratorTest(unittest.TestCase):
 
 
 	def test_generate_schema_method_for_string(self):
-		"""Assert the generate schema method works as expected for string"""
+		"""
+		Assert the generate schema method works as expected for strings
+		Assert data in "attributes" key is ignored
+		   
+		"""
 
 		data = {
 			"attributes": {
